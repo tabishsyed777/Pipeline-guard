@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tabz-pipelineguard"
+version = "0.1.0"
+description = "Contract-driven CSV pipeline checks, reviewable repairs, and verification evidence"
+requires-python = ">=3.11"
+authors = [{name = "Tabish Syed"}]
+license = "MIT"
+dependencies = []
+
+[project.scripts]
+pipelineguard = "pipelineguard.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["pipelineguard*"]

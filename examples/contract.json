@@ -1,0 +1,27 @@
+{
+  "name": "Order line revenue",
+  "columns": {
+    "order_id": {
+      "type": "string",
+      "unique": true
+    },
+    "quantity": {
+      "type": "integer",
+      "default": "1"
+    },
+    "unit_price": {
+      "type": "decimal",
+      "aliases": [
+        "unit_cost"
+      ]
+    }
+  },
+  "transforms": [
+    {
+      "output": "revenue",
+      "op": "multiply",
+      "left": "quantity",
+      "right": "unit_price"
+    }
+  ]
+}

@@ -1,0 +1,152 @@
+[
+  {
+    "name": "unseen quantities and decimals",
+    "headers": [
+      "order_id",
+      "quantity",
+      "unit_cost"
+    ],
+    "rows": [
+      {
+        "order_id": "V-1",
+        "quantity": "7",
+        "unit_cost": "1.25"
+      },
+      {
+        "order_id": "V-2",
+        "quantity": "3",
+        "unit_cost": "0.10"
+      }
+    ],
+    "expected_status": "passed",
+    "expected_outputs": [
+      {
+        "revenue": "8.75"
+      },
+      {
+        "revenue": "0.3"
+      }
+    ]
+  },
+  {
+    "name": "default applies only to missing quantity",
+    "headers": [
+      "order_id",
+      "quantity",
+      "unit_cost"
+    ],
+    "rows": [
+      {
+        "order_id": "V-3",
+        "quantity": "",
+        "unit_cost": "2.35"
+      },
+      {
+        "order_id": "V-4",
+        "quantity": "0",
+        "unit_cost": "100"
+      }
+    ],
+    "expected_status": "passed",
+    "expected_outputs": [
+      {
+        "revenue": "2.35"
+      },
+      {
+        "revenue": "0"
+      }
+    ]
+  },
+  {
+    "name": "canonical schema remains unchanged",
+    "headers": [
+      "order_id",
+      "quantity",
+      "unit_price"
+    ],
+    "rows": [
+      {
+        "order_id": "V-5",
+        "quantity": "4",
+        "unit_price": "6.50"
+      }
+    ],
+    "expected_status": "passed",
+    "expected_outputs": [
+      {
+        "revenue": "26"
+      }
+    ]
+  },
+  {
+    "name": "bad numeric input stays blocked",
+    "headers": [
+      "order_id",
+      "quantity",
+      "unit_cost"
+    ],
+    "rows": [
+      {
+        "order_id": "V-6",
+        "quantity": "two",
+        "unit_cost": "5"
+      }
+    ],
+    "expected_status": "failed",
+    "expected_outputs": [
+      {
+        "revenue": null
+      }
+    ]
+  },
+  {
+    "name": "duplicate order IDs stay blocked",
+    "headers": [
+      "order_id",
+      "quantity",
+      "unit_cost"
+    ],
+    "rows": [
+      {
+        "order_id": "V-7",
+        "quantity": "1",
+        "unit_cost": "2"
+      },
+      {
+        "order_id": "V-7",
+        "quantity": "2",
+        "unit_cost": "3"
+      }
+    ],
+    "expected_status": "failed",
+    "expected_outputs": [
+      {
+        "revenue": "2"
+      },
+      {
+        "revenue": "6"
+      }
+    ]
+  },
+  {
+    "name": "missing price is not invented",
+    "headers": [
+      "order_id",
+      "quantity",
+      "unit_cost"
+    ],
+    "rows": [
+      {
+        "order_id": "V-8",
+        "quantity": "2",
+        "unit_cost": ""
+      }
+    ],
+    "expected_status": "failed",
+    "expected_outputs": [
+      {
+        "revenue": null
+      }
+    ]
+  }
+]
